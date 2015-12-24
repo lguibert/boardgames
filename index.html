@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr" ng-app="boardgamesperso">
+<head>
+    <meta charset="UTF-8">
+    <title>Mes jeux de société</title>
+    <link  rel="stylesheet" href="media/css/style.css"/>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+</head>
+<body>
+<div id="wrap">
+    <div id="main">
+        <div ng-controller="MainController">
+            <div class="loading" ng-show="loading">
+                <div>
+                    <img src="media/img/loader.gif"/>
+                    <span>Chargement...</span>
+                </div>
+            </div>
+        </div>
+        <div ng-view></div>
+        <div ng-controller="BoardgamesController" class="fixeBottomRight animated" ng-click="openAddWindow()"><i class="fa fa-plus-circle fa-4x"></i></div>
+    </div>
+</div>
+</body>
+
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-route/angular-route.min.js"></script>
+
+<script src="media/js/angular/app.js"></script>
+<script src="media/js/angular/routes.js"></script>
+<script src="media/js/angular/boardgames.js"></script>
+<script src="media/js/angular/upload.js"></script>
+<script src="media/js/angular/directives.js"></script>
+
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+</html>

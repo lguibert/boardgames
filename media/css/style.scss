@@ -1,0 +1,150 @@
+@import "animate.css";
+@import "font-awesome.min.css";
+
+$main: 1250px;
+
+$primary-color-dark:   #616161;
+$primary-color:        #9E9E9E;
+$primary-color-light:  #F5F5F5;
+$primary-color-text:   #212121;
+$accent-color:         #FFC107;
+$primary-text-color:   #212121;
+$secondary-text-color: #727272;
+$divider-color:        #B6B6B6;
+
+@mixin reSized($size){
+  height: $size;
+  width: $size;
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin box-shadow($shadow){
+  box-shadow: $shadow;
+  -moz-box-shadow: $shadow;
+  -webkit-box-shadow: $shadow;
+}
+
+html, body, #wrap{
+  background-color: $primary-color-dark;
+}
+
+#wrap{
+  @include reSized(100%);
+  #main{
+    background-color: $primary-color-dark;
+    width: $main;
+    margin: 20px auto auto auto;
+  }
+}
+
+.message{
+  padding:5px;
+  @include border-radius(5px);
+}
+
+.error{
+  @extend .message;
+  background-color: lightcoral;
+  color:$primary-color-light;
+}
+
+.games{
+  width: $main / 5 - 10px;
+  background-color: $divider-color;
+  text-align: center;
+  border: solid 1px $primary-color-light;
+  @include border-radius(10px);
+  display: inline-block;
+  margin: 5px;
+  img{
+    @include reSized(150px);
+    @include border-radius(50%);
+  }
+  .textGame{
+    h1{
+      font-size: 22px;
+    }
+    h2{
+      font-size: 20px;
+    }
+    ul{
+      padding-left: 30px;
+      li{
+        text-align: left;
+        margin: 0;
+      }
+    }
+  }
+}
+
+.obligatory{
+  color:red;
+}
+
+.addWindow{
+  border: solid 1px $primary-color-light;
+  background-color: $primary-color;
+  @include border-radius(15px);
+  @include box-shadow(none!important);
+  overflow: hidden;
+  display: none;
+  position: fixed;
+  right: 15px;
+  bottom: 75px;
+  height:650px;
+  padding:0 5px 0 5px;
+  width: 500px;
+  border-radius:3px;
+  box-shadow:0 0 2px rgba(0,0,0,.5);
+  &:after{
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    right: 5px;
+    width: 0;
+    height: 0;
+    border-top: 12px solid $primary-color-light;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+  }
+  h1{
+    font-size: 25px;
+    font-weight: 700;
+    margin-top: 5px;
+  }
+  .btn{
+    background-color: $accent-color;
+    font-weight: 700;
+  }
+}
+
+.fixeBottomRight{
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  color: $accent-color;
+  &:hover{
+    @extend .jello;
+    cursor: pointer;
+  }
+}
+
+.jello {
+  -webkit-animation-name: jello;
+  animation-name: jello;
+  -webkit-transform-origin: center;
+  transform-origin: center;
+}
+
+.bounce {
+  -webkit-animation-name: bounce;
+  animation-name: bounce;
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}

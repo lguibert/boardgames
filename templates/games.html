@@ -1,0 +1,66 @@
+<div ng-controller="BoardgamesController">
+    <div class="games" ng-repeat="game in games">
+        <img ng-show="game.image" src="{{game.image}}"/>
+
+        <div class="textGame">
+            <h1>{{game.name}}</h1>
+
+            <h2 ng-show="game.sub_name">{{game.sub_name}}</h2>
+            <ul>
+                <li>{{game.min_player}} joueurs minimum</li>
+                <li>{{game.max_player}} joueurs maximum</li>
+                <li ng-show="game.price">{{game.price}} €</li>
+                <li ng-show="game.date_buy">Acheté le {{game.date_buy | date: "dd/MM/yyyy"}}</li>
+            </ul>
+        </div>
+    </div>
+
+    <fieldset class="addWindow">
+        <h1>Ajouter un jeu</h1>
+        <div class="content">
+            <form novalidate id="addGameForm" name="addGameForm" ng-submit="addGameForm.$valid">
+                <div class="form-group">
+                    <label for="name">Nom <span class="obligatory">*</span></label>
+                    <input required class="form-control" type="text" ng-model="game.name" name="name" id="name"/>
+                    <div ng-show="addGameForm.$submitted || addGameForm.name.$touched">
+                        <div class="message error" ng-show="addGameForm.name.$error.required">Le nom est obligatoire.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="sub_name">Complétement de nom</label>
+                    <input class="form-control" type="text" ng-model="game.sub_name" name="sub_name" id="sub_name"/>
+                </div>
+                <div class="form-group">
+                    <label for="min_player">Joueur mini <span class="obligatory">*</span></label>
+                    <input required class="form-control" type="number" min="0" step="1" ng-model="game.min_player" name="min_player" id="min_player"/>
+                    <div ng-show="addGameForm.$submitted || addGameForm.min_player.$touched">
+                        <div class="message error" ng-show="addGameForm.min_player.$error.required">Le nombre minimum de joueur est obligatoire.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="max_player">Joueur max <span class="obligatory">*</span></label>
+                    <input required class="form-control" type="number" min="0" step="1" ng-model="game.max_player" name="max_player" id="max_player"/>
+                    <div ng-show="addGameForm.$submitted || addGameForm.max_player.$touched">
+                        <div class="message error" ng-show="addGameForm.max_player.$error.required">Le nombre maximum de joueur est obligatoire.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="price">Prix d'achat</label>
+                    <input class="form-control" type="number" min="0" step="0.01" ng-model="game.price" name="price" id="price"/>
+                </div>
+                <div class="form-group">
+                    <label for="date_buy">Date d'achat</label>
+                    <input class="form-control" type="date" ng-model="game.date_buy" name="date_buy" id="date_buy"/>
+                </div>
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input fileread="uploadimage" ng-file-select="onFileSelect($files)" class="form-control" type="file" ng-model="game.image" name="image" id="image"/>
+                </div>
+                <input ng-disabled="addGameForm.$invalid" class="btn" type="submit" ng-click="addGame(game)" value="Ajouter"/>
+            </form>
+        </div>
+    </fieldset>
+</div>
