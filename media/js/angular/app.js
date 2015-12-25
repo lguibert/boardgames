@@ -1,4 +1,4 @@
-var app = angular.module('boardgamesperso', ['ngRoute']);
+var app = angular.module('boardgamesperso', ['ngRoute', 'ngAnimate']);
 var server = "http://localhost:8000/";
 
 

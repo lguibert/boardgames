@@ -1,5 +1,5 @@
 <div ng-controller="BoardgamesController">
-    <div class="games" ng-repeat="game in games">
+    <div class="games selfAnimated" ng-repeat="game in games">
         <img ng-show="game.image" src="{{game.image}}"/>
 
         <div class="textGame">
@@ -63,4 +63,6 @@
             </form>
         </div>
     </fieldset>
+
+    <div class="fixeBottomRight animated" ng-click="openAddWindow()"><i class="fa fa-plus-circle fa-4x"></i></div>
 </div>

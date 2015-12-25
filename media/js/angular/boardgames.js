@@ -32,10 +32,11 @@ app.factory('GamesFactory', ['$http', '$q', function ($http, $q) {
 }]);
 
 
-app.controller('BoardgamesController', ['$scope', '$rootScope', 'GamesFactory', 'LoadingState', '$route', function ($scope, $rootScope, GamesFactory, LoadingState, $route) {
+app.controller('BoardgamesController', ['$scope', '$rootScope', 'GamesFactory', 'LoadingState', function ($scope, $rootScope, GamesFactory, LoadingState) {
     getGames();
 
     function getGames(){
+        console.log("get games called");
         LoadingState.setLoadingState(true);
         $scope.loading = LoadingState.getLoadingState();
 

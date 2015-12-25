@@ -10,15 +10,19 @@
 <div id="wrap">
     <div id="main">
         <div ng-controller="MainController">
-            <div class="loading" ng-show="loading">
+            <div class="loading selfAnimatedShow" ng-show="loading">
                 <div>
-                    <img src="media/img/loader.gif"/>
-                    <span>Chargement...</span>
+                    <div class="spinner">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                    </div>
                 </div>
             </div>
         </div>
         <div ng-view></div>
-        <div ng-controller="BoardgamesController" class="fixeBottomRight animated" ng-click="openAddWindow()"><i class="fa fa-plus-circle fa-4x"></i></div>
     </div>
 </div>
 </body>
@@ -26,6 +30,7 @@
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-route/angular-route.min.js"></script>
+<script src="bower_components/angular-animate/angular-animate.min.js"></script>
 
 <script src="media/js/angular/app.js"></script>
 <script src="media/js/angular/routes.js"></script>
