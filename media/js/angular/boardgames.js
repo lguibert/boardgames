@@ -16,7 +16,7 @@ app.factory('GamesFactory', ['$http', '$q', function ($http, $q) {
             var deferred = $q.defer();
             $http({
                 method: 'POST',
-                url: server + 'boardgames/?format=json',
+                url: server + 'boardgames/add/',
                 data: game,
                 contentType: 'application/json'
             })

@@ -68,7 +68,7 @@ html, body, #wrap {
   position: fixed;
   right: 15px;
   bottom: 75px;
-  height: 650px;
+  height: 690px;
   padding: 0 5px 0 5px;
   width: 500px;
   border-radius: 3px;
@@ -77,6 +77,7 @@ html, body, #wrap {
     content: '';
     position: absolute;
     bottom: -12px;
+    z-index: 9999;
     right: 5px;
     width: 0;
     height: 0;
