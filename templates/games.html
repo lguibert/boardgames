@@ -1,6 +1,6 @@
-<div ng-controller="BoardgamesController">
+<div ng-controller="BoardgamesController" ng-show="!loading">
     <div class="games selfAnimated" ng-repeat="game in games">
-        <img ng-show="game.image" src="{{game.image}}"/>
+        <img ng-show="game.image" src="{{game.image}}" ng-dblclick="openUpdateGame(game.id, game)"/>
 
         <div class="textGame">
             <h1>{{game.name}}</h1>
@@ -16,7 +16,8 @@
     </div>
 
     <fieldset class="addWindow">
-        <h1>Ajouter un jeu</h1>
+        <h1 ng-show="!currently_update">Ajouter un jeu</h1>
+        <h1 ng-show="currently_update">Modifier le jeu</h1>
         <div class="content">
             <form novalidate id="addGameForm" name="addGameForm" ng-submit="addGameForm.$valid">
                 <div class="form-group">
@@ -61,7 +62,13 @@
                     <label>Ou</label>
                     <input fileread="uploadimage" ng-file-select="onFileSelect($files)" class="form-control" type="file" ng-model="game.image" name="image" id="image"/>
                 </div>
-                <input ng-disabled="addGameForm.$invalid" class="btn" type="submit" ng-click="addGame(game)" value="Ajouter"/>
+                <div ng-show="currently_update" class="checkbox">
+                    <label for="active"><input type="checkbox" name="active" id="active" ng-model="game.active"  ng-checked="game.active == true">Actif</label>
+                </div>
+
+                <input type="hidden" ng-model="game.id" name="id" id="id">
+                <input ng-show="!currently_update" ng-disabled="addGameForm.$invalid" class="btn" type="submit" ng-click="addGame(game)" value="Valider"/>
+                <input ng-show="currently_update" ng-disabled="addGameForm.$invalid" class="btn" type="submit" ng-click="updateGame(game)" value="Valider"/>
             </form>
         </div>
     </fieldset>

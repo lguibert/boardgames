@@ -27,6 +27,22 @@ app.factory('GamesFactory', ['$http', '$q', function ($http, $q) {
                     deferred.reject(msg);
                 });
             return deferred.promise;
+        },
+        updateBoardgames: function(game){
+            var deferred = $q.defer();
+            $http({
+                method: 'POST',
+                url: server + 'boardgames/update/',
+                data: game,
+                contentType: 'application/json'
+            })
+                .success(function (data) {
+                    deferred.resolve(data);
+                })
+                .error(function (msg) {
+                    deferred.reject(msg);
+                });
+            return deferred.promise;
         }
     };
 }]);
@@ -36,7 +52,6 @@ app.controller('BoardgamesController', ['$scope', '$rootScope', 'GamesFactory', 
     getGames();
 
     function getGames(){
-        console.log("get games called");
         LoadingState.setLoadingState(true);
         $scope.loading = LoadingState.getLoadingState();
 
@@ -54,17 +69,50 @@ app.controller('BoardgamesController', ['$scope', '$rootScope', 'GamesFactory', 
 
 
     $scope.openAddWindow = function(){
+        if($scope.currently_update){
+            $scope.game = null;
+            $scope.currently_update = false;
+            $scope.addGameForm.$setPristine();
+            $scope.addGameForm.$setUntouched();
+        }
         $('.addWindow').toggle();
     };
 
     $scope.addGame = function(game){
         game.image = $scope.uploadimage;
         GamesFactory.addBoardgames(game).then(function(){
-            $scope.game = null;
-            $("input[type='file']").val('');
-            $scope.addGameForm.$setPristine();
-            $('.addWindows').toggle();
-            getGames();
+            doItAfterModification();
+        }, function(msg){
+
+        });
+    };
+
+    function doItAfterModification(){
+        $scope.game = null;
+        //$scope.games = null;
+        $("input[type='file']").val('');
+        $scope.addGameForm.$setPristine();
+        $scope.addGameForm.$setUntouched();
+        $('.addWindow').hide();
+        //getGames();
+    }
+
+    $scope.openUpdateGame = function(id, game){
+        if($scope.currently_update){
+            $scope.currently_update = false;
+            $('.addWindow').hide();
+        }else{
+            $('.addWindow').show();
+            $scope.currently_update = true;
+            game.price = parseFloat(game.price);
+            game.date_buy = new Date(game.date_buy);
+            $scope.game = game;
+        }
+    };
+
+    $scope.updateGame = function(game){
+        GamesFactory.updateBoardgames(game).then(function(){
+            doItAfterModification();
         }, function(msg){
 
         });
