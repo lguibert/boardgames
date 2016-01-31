@@ -1,7 +1,7 @@
 var app = angular.module('boardgamesperso', ['ngRoute', 'ngAnimate']);
 //var server = "http://dev.lucasguibert.com:8000/";
-var server = "http://localhost:8000/";
-
+//var server = "http://localhost:8000/";
+var server = "http://api.boardgames.lucasguibert.com/";
 
 app.service('LoadingState', ['$rootScope', function ($rootScope) {
     return {
